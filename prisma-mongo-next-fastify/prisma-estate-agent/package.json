@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": " The prisma client for the estate agent",
   "main": "index.js",
+  "engines": {
+    "npm": ">=8.19.2",
+    "node": ">=16.0.0"
+  },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
   },
