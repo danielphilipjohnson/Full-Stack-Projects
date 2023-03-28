@@ -1,0 +1,83 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum HouseStatus {
+  SALE
+  RENT
+}
+
+enum HouseType {
+  COTTAGE
+  RANCH
+  VILLA
+  CARAVAN
+  SEAHOUSE
+  BUNGALOW
+  FLAT
+  APARTMENT
+  HOUSE
+  MEWS
+  PENTHOUSE
+  STUDIO
+}
+
+model Property {
+  id                String      @id @default(auto()) @map("_id") @db.ObjectId
+  status            HouseStatus
+  houseType         HouseType
+  price             Float
+  listDate          DateTime    @default(now())
+  isNewConstruction Boolean
+  isShowcase        Boolean
+  isNewListing      Boolean
+  beds              Int
+  baths             Int
+  sqft              Float
+  lotSize           Float
+  headline          String
+  description       String
+  features          Feature[]
+  featureId         String      @db.ObjectId
+  photos            String[]
+  address           Address     @relation(fields: [addressId], references: [id])
+  addressId         String      @db.ObjectId
+  published         Boolean     @default(false)
+  contactId         String      @db.ObjectId
+  contact           Contact     @relation(fields: [contactId], references: [id])
+}
+
+model Feature {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  Property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  propertyId  String   @db.ObjectId
+}
+
+model Contact {
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  phone    String
+  mobile   String
+  email    String
+  website  String
+  Property Property[]
+}
+
+// Address is an embedded document
+model Address {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  addressLine1 String     @unique
+  addressLine2 String     @unique
+  city         String
+  county       String
+  postalCode   String
+  lat          Float
+  lon          Float
+  Property     Property[]
+}
