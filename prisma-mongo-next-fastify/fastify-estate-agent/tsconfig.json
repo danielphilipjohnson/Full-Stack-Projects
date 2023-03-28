@@ -13,14 +13,8 @@
     "esModuleInterop": true,
     "strictNullChecks": true,
     "skipLibCheck": true
-    // "lib": [
-    //   "es2019"
-    // ]
   },
-  "include": [
-    "src/*",
-    "src/**/*.ts",
-  ],
+  "include": ["src/*", "src/**/*.ts"],
   "exclude": [
     "node_modules",
     "./node_modules",
