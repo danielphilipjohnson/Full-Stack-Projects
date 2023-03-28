@@ -1,22 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import { HouseType, PrismaClient, HouseStatus } from "@prisma/client";
 const prisma = new PrismaClient();
 
 import { faker } from "@faker-js/faker";
 
-type HouseStatus = "SALE" | "RENT";
-type HouseType =
-  | "COTTAGE"
-  | "RANCH"
-  | "VILLA"
-  | "CARAVAN"
-  | "SEAHOUSE"
-  | "BUNGALOW"
-  | "FLAT"
-  | "APARTMENT"
-  | "HOUSE"
-  | "MEWS"
-  | "PENTHOUSE"
-  | "STUDIO";
+
 
 const amountOfHousesToGenerate = 3000;
 

@@ -7,7 +7,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-enum Status {
+enum HouseStatus {
   SALE
   RENT
 }
@@ -28,11 +28,11 @@ enum HouseType {
 }
 
 model Property {
-  id                String    @id @default(auto()) @map("_id") @db.ObjectId
-  status            Status
+  id                String      @id @default(auto()) @map("_id") @db.ObjectId
+  status            HouseStatus
   houseType         HouseType
   price             Float
-  listDate          DateTime  @default(now())
+  listDate          DateTime    @default(now())
   isNewConstruction Boolean
   isShowcase        Boolean
   isNewListing      Boolean
@@ -43,13 +43,13 @@ model Property {
   headline          String
   description       String
   features          Feature[]
-  featureId         String    @db.ObjectId
+  featureId         String      @db.ObjectId
   photos            String[]
-  address           Address   @relation(fields: [addressId], references: [id])
-  addressId         String    @db.ObjectId
-  published         Boolean   @default(false)
-  contactId         String    @db.ObjectId
-  contact           Contact   @relation(fields: [contactId], references: [id])
+  address           Address     @relation(fields: [addressId], references: [id])
+  addressId         String      @db.ObjectId
+  published         Boolean     @default(false)
+  contactId         String      @db.ObjectId
+  contact           Contact     @relation(fields: [contactId], references: [id])
 }
 
 model Feature {
