@@ -1,6 +1,7 @@
-import * as fastify from "fastify";
-
-import { HouseType, HouseStatus } from "../../prisma-estate-agent/node_modules/.prisma/client";
+import {
+  HouseType,
+  HouseStatus
+} from "../../prisma-estate-agent/node_modules/.prisma/client";
 
 export * from "../../prisma-estate-agent/node_modules/.prisma/client";
 export interface SearchHousePrismaQuery {
@@ -26,7 +27,7 @@ export interface SearchHousePrismaQuery {
     equals: HouseType;
   };
 }
-export interface SearchQueryString {
+export interface SearchQuery {
   housetype: HouseType;
   status: HouseStatus | "";
   minprice: number;
@@ -40,26 +41,3 @@ export interface HouseQueryPagination {
   page: number;
   limit: number;
 }
-
-
-export const houseParamJsonSchema: fastify.RouteShorthandOptions = {
-  schema: {
-    params: {
-      type: "object",
-      properties: {
-        id: { type: "string" }
-      }
-    }
-  }
-};
-
-export const housesByTypeParamJsonSchema: fastify.RouteShorthandOptions = {
-  schema: {
-    params: {
-      type: "object",
-      properties: {
-        houseType: { type: "string" }
-      }
-    }
-  }
-};

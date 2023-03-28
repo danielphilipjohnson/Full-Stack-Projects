@@ -1,8 +1,9 @@
+import * as fastify from "fastify";
 import { FastifyInstance, FastifyPluginAsync } from "fastify";
 import fp from "fastify-plugin";
 
 import { HouseType } from "../../../../prisma-estate-agent/node_modules/.prisma/client";
-import { houseParamJsonSchema, HouseQueryPagination, housesByTypeParamJsonSchema } from "../../../types";
+import { HouseQueryPagination } from "../../../types";
 
 import {
   getHouse,
@@ -15,13 +16,34 @@ import {
 const HOUSE_LIMIT = 20;
 const MAX_LIMIT = 100;
 
+export const houseParamJsonSchema: fastify.RouteShorthandOptions = {
+  schema: {
+    params: {
+      type: "object",
+      properties: {
+        id: { type: "string" }
+      }
+    }
+  }
+};
+
+export const housesByTypeParamJsonSchema: fastify.RouteShorthandOptions = {
+  schema: {
+    params: {
+      type: "object",
+      properties: {
+        houseType: { type: "string" }
+      }
+    }
+  }
+};
+
 const SearchRoute: FastifyPluginAsync = async (server: FastifyInstance) => {
   // houses?limit=10&page=0
   server.get<{ Querystring: HouseQueryPagination }>(
     "/houses",
     async (request, _) => {
       try {
-        
         const limit = request.query.limit
           ? Number(request.query.limit) > MAX_LIMIT
             ? MAX_LIMIT

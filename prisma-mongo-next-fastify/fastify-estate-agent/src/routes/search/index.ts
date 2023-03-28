@@ -2,17 +2,8 @@ import { FastifyInstance, FastifyPluginAsync } from "fastify";
 import * as fastify from "fastify";
 import fp from "fastify-plugin";
 import { searchHouses } from "../../controller/search";
-import { HouseType, HouseStatus } from "../../../types";
+import { SearchQuery } from "../../../types";
 
-interface SearchQuery {
-  housetype: HouseType;
-  status: HouseStatus | "";
-  minprice: number;
-  maxprice: number;
-  bedrooms: number;
-  bathrooms: number;
-  location: string;
-}
 
 const querySearchJsonSchema: fastify.RouteShorthandOptions = {
   schema: {
