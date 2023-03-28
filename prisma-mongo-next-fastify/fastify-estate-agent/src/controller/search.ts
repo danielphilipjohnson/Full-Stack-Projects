@@ -1,8 +1,8 @@
 import { prisma } from "../helper/utils";
-import { HouseType, SearchHousePrismaQuery, SearchQueryString, HouseStatus } from "../../types";
+import { HouseType, SearchHousePrismaQuery, SearchQuery, HouseStatus } from "../../types";
 
 
-export const searchHouses = async (searchTerms: SearchQueryString) => {
+export const searchHouses = async (searchTerms: SearchQuery) => {
   const houseStatus: HouseStatus = validateHouseStatus(searchTerms.status)
     ? (searchTerms.status.toUpperCase() as HouseStatus)
     : "SALE";
