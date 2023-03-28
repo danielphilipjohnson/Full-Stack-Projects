@@ -1,0 +1,32 @@
+{
+  "ts-node": {
+    "files": true
+  },
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "outDir": "dist",
+    "target": "ESNext",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true
+    // "lib": [
+    //   "es2019"
+    // ]
+  },
+  "include": [
+    "src/*",
+    "src/**/*.ts",
+  ],
+  "exclude": [
+    "node_modules",
+    "./node_modules",
+    "./node_modules/*",
+    "./node_modules/@types/node/index.d.ts",
+    "./node_modules/.prisma/client/index.d.ts"
+  ],
+  "compileOnSave": true
+}
